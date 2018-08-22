@@ -1,0 +1,93 @@
+{%extends 'base.html'%}
+{%block main%}
+{%load static%}
+<div id="fh5co-main">
+    <div class="fh5co-narrow-content">
+        <header class="entry-header">
+            <h1 class="entry-title">{{ post.title }}</h1>
+            <div class="entry-meta">
+                <span class="post-category">
+                    <a href="">{{ post.category.name }}</a></span>
+                <span class="post-date"><a href="#"><time class="entry-date"
+                                                          datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
+                <span class="post-author"><a href="#">{{ post.author }}</a></span>
+                <span class="comments-link">
+                    <a href="{{ post.get_absolute_url }}#comment-area">{{ post.comment_set.count }} 评论</a></span>
+                <span class="views-count"><a href="#">{{ post.views }} 阅读</a></span>
+            </div>
+        </header>
+        <div class="entry-content clearfix">
+            {{ post.body|safe }}
+            <div class="widget-tag-cloud">
+                <ul>
+                    标签：
+                    {% for tag in post.tags.all %}
+                        <li><a href=""># {{ tag.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    <section class="comment-area" id="comment-area">
+        <hr>
+         <h4>发表评论</h4>
+        <form action="#" id="comForm"  method="post" onsubmit="return false" class="comment-form">
+            <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <textarea name="text" id="comment" cols="30" rows="7" class="form-control" placeholder="评论"></textarea>
+                </div>
+            </div>
+                <input type="hidden"name="post" value="{{post.pk}}">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input name="name" type="text" placeholder="名字" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input name="email" type="text" placeholder="邮箱" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="发送评论" class="btn btn-primary btn-md" onclick="Submit('/blog/comment/','#comForm')">
+                </div>
+            </div>
+            </div>
+        </form>
+        <div class="comment-list-panel">
+            <h3>评论列表，共 <span>{{ post.comment_set.count }}</span> 条评论</h3>
+            <ul class="comment-list list-unstyled">
+                {% for comment in comments %}
+                    <li class="comment-item">
+                        <span class="nickname">{{ comment.name }}</span>
+                        <time class="submit-date"
+                              datetime="{{ comment.created_time }}">{{ comment.created_time }}</time>
+                        <div class="text">
+                            {{ comment.text|safe }}
+                        </div>
+                    </li>
+                {% empty %}
+                    暂无评论
+                {% endfor %}
+                {%if is_paginated%}
+                <div align="center">
+					{%if comments.has_previous%}
+				<a href="?page={{comments.previous_page_number}}">上一页</a>
+					{%else%}
+					<a>上一页</a>
+					{%endif%}&nbsp;
+
+					{%if comments.has_next%}
+				<a href="?page={{comments.next_page_number}}">下一页</a>
+					{%else%}
+					<a>下一页</a>
+					{%endif%}<br>
+					到第<input id="turnPage" pk="{{post.pk}}" sum="{{paginator.num_pages}}"type="text" style="width:25px;height:20px;">页
+					<button onclick="TurnPage('/blog/{{post.pk}}/')" >跳转</button>
+					<br>
+					共{{paginator.num_pages}}页
+					当前第{{comments.number}}页
+				</div>
+                {%endif%}
+            </ul>
+        </div>
+    </section>
+</div>
+{%endblock main%}

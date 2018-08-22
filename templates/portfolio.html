@@ -1,0 +1,65 @@
+{%extends 'base.html'%}
+{%block main%}
+{%load static%}
+		<div id="fh5co-main">
+			<div class="fh5co-narrow-content">
+				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">个人作品展示</h2>
+				<div class="row row-bottom-padded-md">
+					{%for portfolio in portfolio_list%}
+					<div class="col-md-3 col-sm-6 col-padding text-center animate-box">
+						<a href="https://{{portfolio.url}}" class="work image-popup" style="background-image: url({%static 'media/'%}{{portfolio.img}});">
+							<div class="desc">
+								<h3>{{portfolio.name}}</h3>
+								<!--<span>IllustrationIllustrationIllustrationIllusion</span>-->
+								<p>{{portfolio.info}}</p>
+							</div>
+						</a>
+						<a href="{%url 'portfolio:download' portfolio.pk%}">下载源代码</a>
+					</div>
+					{%empty%}
+					<a style="margin-left:100px;">暂无项目</a>
+					{%endfor %}
+
+
+
+				</div>
+				{%if is_paginated%}
+				<div align="center">
+					{%if page_obj.has_previous%}
+				<a href="?page={{page_obj.previous_page_number}}">上一页</a>
+					{%else%}
+					<a>上一页</a>
+					{%endif%}&nbsp;
+
+					{%if page_obj.has_next%}
+				<a href="?page={{page_obj.next_page_number}}">下一页</a>
+					{%else%}
+					<a>下一页</a>
+					{%endif%}<br>
+					到第<input id="turnPage" sum="{{paginator.num_pages}}"type="text" style="width:25px;height:20px;">页
+					<button onclick="TurnPage(/portfolio/)" >跳转</button>
+					<br>
+					共{{paginator.num_pages}}页
+					当前第{{page_obj.number}}页
+				</div>
+				{%endif%}
+			</div>
+		
+			<div id="get-in-touch">
+				<div class="fh5co-narrow-content">
+					<div class="row">
+						<div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
+							<h1 class="fh5co-heading-colored">联系</h1>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+							<p class="fh5co-lead">如果您对本网站有任何疑问，或者对本站有任何意见或建议，非常欢迎您直接与我联络，我将竭诚为您解决。</p>
+							<p><a href="/contact/" class="btn btn-primary">跳转联系</a></p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	{%endblock main%}

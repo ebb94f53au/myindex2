@@ -1,0 +1,89 @@
+.content-body {
+    padding-bottom: 4em;
+}
+
+.post {
+    background: #fff;
+    padding: 30px 30px 0;
+}
+
+.entry-title {
+    text-align: center;
+    font-size: 1.9em;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    padding: 10px 20px 0;
+}
+
+.entry-meta {
+    text-align: center;
+    color: #DDDDDD;
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+
+.entry-content {
+    font-size: 18px;
+    line-height: 1.9;
+    font-weight: 300;
+    color: #000;
+}
+
+.post-category::after,
+.post-date::after,
+.post-author::after,
+.comments-link::after {
+    content: ' ·';
+    color: #000;
+}
+.widget-tag-cloud ul {
+    padding: 0;
+    margin: 0;
+    margin-right: -10px;
+}
+
+.widget-tag-cloud ul li {
+    list-style-type: none;
+    font-size: 13px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 3px 8px;
+    border: 1px solid #ddd;
+}
+.comment-list-panel {
+    margin-top: 30px;
+}
+.comment-list {
+    margin-top: 15px;
+}
+
+.comment-item:not(:last-child) {
+    border-bottom: 1px #ccc solid;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.comment-item .nickname,
+.comment-item .submit-date {
+    color: #777;
+    font-size: 14px;
+}
+
+.comment-item .nickname:after {
+    content: ' ·';
+}
+
+.comment-item .text {
+    padding-top: 5px;
+    font-size: 16px;
+}
+#comment{
+height:185px
+
+}
+.desc > p{
+    word-wrap: break-word;
+    word-break:break-all;
+    display:block;
+}
