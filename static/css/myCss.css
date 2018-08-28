@@ -87,3 +87,14 @@ height:185px
     word-break:break-all;
     display:block;
 }
+
+/***  顶部导航***/
+.guide{width:60px;margin-left:600px;position:fixed;left:50%;bottom:134px;_position:absolute;_top:expression(documentElement.scrollTop+documentElement.clientHeight - this.clientHeight - 134+'px');display:block;}
+.guide a{display:block;width:60px;height:50px;background:url(../images/sprite_v1.png) no-repeat ;margin-top:10px;text-decoration:none;font:16px/50px "Microsoft YaHei";text-align:center;color:#fff;border-radius:2px;}
+.guide a span{display:none;text-align:center;}
+.guide a:hover{text-decoration:none;background-color:#39F;color:#fff;}
+.guide a:hover span{display:block;width:60px;background:#39F}
+.guide .find{background-position:-84px -236px;}
+.guide .report{background-position:-146px -236px;}
+.guide .edit{background-position:-83px -185px;}
+.guide .top{background-position:-145px -185px;}

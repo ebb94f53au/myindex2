@@ -33,6 +33,7 @@ class Post(models.Model):
     #博客
     title = models.CharField(max_length=70,verbose_name='文章标题★')
     body = models.TextField(verbose_name='文章正文★')
+    #正文中有图片信息在images/blog/conImg文件夹中
     created_time = models.DateTimeField(default=timezone.now,verbose_name='创建时间')
     modified_time = models.DateTimeField(default=timezone.now,verbose_name='修改时间★')
     excerpt = models.CharField(max_length=200, blank=True,verbose_name='文章摘要')
