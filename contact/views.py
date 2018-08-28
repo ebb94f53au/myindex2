@@ -8,13 +8,15 @@ class ContactPageView(View):
     #联系页面
     def get(self,request):
         #get时展示联系方式
-        info=get_object_or_404(Info, isDelete=False)
+        try:
+            info=Info.objects.get(isDelete=False)
+        except:
+            pass
         return render(request,'contact.html',{'info':info,
                                               'title':'★联系页面'})
     def post(self,request):
         #post时提交联系信息
         form = messageForm(request.POST)
-        print('11111111'*22)
         if form.is_valid():
             message = form.save()
             message.save()

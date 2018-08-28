@@ -23,7 +23,6 @@ def Download(request,pk):
     #下载个人作品源码
     p=Portfolio.objects.get(pk=pk)
     path=os.path.join(settings.MEDIA_ROOT,p.project.name)
-    print(path)
     def readFile(filename,size=512):
         with open(filename,'rb') as  f:
             while True:

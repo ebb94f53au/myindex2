@@ -10,12 +10,15 @@ class AboutPageView(TemplateView):
     template_name='about.html'
     def get_context_data(self, **kwargs):
         context=super(AboutPageView,self).get_context_data(**kwargs)
-        info=aboutInfo.objects.get(isDelete=False)
-        info.text=markdown.markdown(info.text,extensions=[
+        try:
+            info=aboutInfo.objects.get(isDelete=False)
+            info.text=markdown.markdown(info.text,extensions=[
                                       'markdown.extensions.extra',
                                       'markdown.extensions.codehilite',
                                       'markdown.extensions.toc',
                                   ])
-        context['info']=info
+            context['info']=info
+        except:
+            pass
         context['title']='关于本站'
         return context

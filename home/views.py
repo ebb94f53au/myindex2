@@ -18,7 +18,10 @@ class HomePageView(TemplateView):
             num.addToday()
             num.addSum()
         except:
-            nums=ViewsNum.objects.filter(isDelete=False)[0].sumNum
+            try:
+                nums=ViewsNum.objects.filter(isDelete=False)[0].sumNum
+            except:
+                nums=1
             ViewsNum.create(today,nums)
         return response
 
