@@ -75,25 +75,25 @@ class CommentPost(View):
         else:
             return JsonResponse({'status': 'error'})
 
-import os
-from django.conf import settings
-import time
-def uploadIMG(request):
-    #admin后台富文本上传图片
-    if request.method == 'POST':
-        img = request.FILES.get('img')
-        if img.name.split('.')[1]=='jpg' or img.name.split('.')[1]=='png' or img.name.split('.')[1]=='jpeg'\
-            or img.name.split('.')[1]=='bmp':
-            imgName=str(time.time())+'.'+img.name.split('.')[1]
-            filepath = os.path.join(settings.MEDIA_ROOT+'images/blog/conImg',imgName )
-            with open(filepath, 'wb') as sc:
-                for info in img.chunks():
-                    sc.write(info)
-
-            return HttpResponse("<script>top.$('.mce-btn.mce-open').parent().find('.mce-textbox')."
-                                "val('/static/media/images/blog/conImg/"+imgName+"').closest('.mce-window').find('.mce-primary').click();</script>")
-        else:
-            return HttpResponse('上传失败')
-    else:
-        return HttpResponse('上传失败')
+# import os
+# from django.conf import settings
+# import time
+# def uploadIMG(request):
+#     #admin后台富文本上传图片
+#     if request.method == 'POST':
+#         img = request.FILES.get('img')
+#         if img.name.split('.')[1]=='jpg' or img.name.split('.')[1]=='png' or img.name.split('.')[1]=='jpeg'\
+#             or img.name.split('.')[1]=='bmp':
+#             imgName=str(time.time())+'.'+img.name.split('.')[1]
+#             filepath = os.path.join(settings.MEDIA_ROOT+'upload/blog/context',imgName )
+#             with open(filepath, 'wb') as sc:
+#                 for info in img.chunks():
+#                     sc.write(info)
+#
+#             return HttpResponse("<script>top.$('.mce-btn.mce-open').parent().find('.mce-textbox')."
+#                                 "val('/static/media/upload/blog/context/"+imgName+"').closest('.mce-window').find('.mce-primary').click();</script>")
+#         else:
+#             return HttpResponse('上传失败')
+#     else:
+#         return HttpResponse('上传失败')
 

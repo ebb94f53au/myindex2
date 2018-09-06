@@ -28,11 +28,13 @@ class Tag(models.Model):
         verbose_name_plural='博客标签'
 
 
-
+from DjangoUeditor.models import UEditorField
 class Post(models.Model):
     #博客
     title = models.CharField(max_length=70,verbose_name='文章标题★')
-    body = models.TextField(verbose_name='文章正文★')
+    body = UEditorField(verbose_name='文章正文★',height=300, width=800,max_length=1024000000000,
+                           default=u'', blank=True, imagePath='upload/blog/context',
+                           toolbars='besttome', filePath='upload/blog/context')
     #正文中有图片信息在images/blog/conImg文件夹中
     created_time = models.DateTimeField(default=timezone.now,verbose_name='创建时间')
     modified_time = models.DateTimeField(default=timezone.now,verbose_name='修改时间★')
@@ -40,7 +42,7 @@ class Post(models.Model):
     views = models.PositiveIntegerField(default=0,verbose_name='阅读量')
     category = models.ForeignKey(Category,on_delete=models.CASCADE,verbose_name='分类★')
     tags = models.ManyToManyField(Tag, blank=True,verbose_name='标签★')
-    img = models.ImageField(default='images/blog/img-4.jpg',upload_to='images/blog/poster',verbose_name='图片')#MEDIA
+    img = models.ImageField(default='upload/blog/img-4.jpg',upload_to='upload/blog/poster',verbose_name='图片')#MEDIA
     # 文章作者，这里 User 是从 django.contrib.auth.models 导入的。
     # django.contrib.auth 是 Django 内置的应用，专门用于处理网站用户的注册、登录等流程，
     # User 是 Django 为我们已经写好的用户模型。

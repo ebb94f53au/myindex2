@@ -15,16 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from blog.views import *
+import xadmin
 
-
+xadmin.autodiscover()
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
+    path('admin/', xadmin.site.urls),
     path('',include('home.urls')),
     path('',include('about.urls')),
     path('',include('blog.urls')),
     path('',include('contact.urls')),
     path('',include('portfolio.urls')),
+    path('ueditor/',include('DjangoUeditor.urls' )),
 
 ]

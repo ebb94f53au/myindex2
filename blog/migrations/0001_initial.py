@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 ('modified_time', models.DateTimeField(verbose_name='修改时间')),
                 ('excerpt', models.CharField(blank=True, max_length=200, verbose_name='文章摘要')),
                 ('views', models.PositiveIntegerField(default=0, verbose_name='阅读量')),
-                ('img', models.ImageField(upload_to='images/blog', verbose_name='图片')),
+                ('img', models.ImageField(upload_to='upload/blog', verbose_name='图片')),
                 ('isDelete', models.BooleanField(default=False, verbose_name='是否逻辑删除')),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='作者')),
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='blog.Category', verbose_name='分类')),

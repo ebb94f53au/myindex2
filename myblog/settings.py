@@ -37,11 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #5个页面
     'home',
     'blog',
     'about',
     'contact',
     'portfolio',
+    #xadmin后台
+    'xadmin',
+    'crispy_forms',
+    #富文本
+    'DjangoUeditor',
 ]
 
 MIDDLEWARE = [

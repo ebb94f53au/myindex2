@@ -4,8 +4,8 @@ from django.db import models
 class Wheel(models.Model):
     #主页滚动图
     text=models.CharField(max_length=255,verbose_name='主页滚动句★')
-    #将上传的图片定为'static/media/images/wheel'下
-    img=models.ImageField(upload_to='images/wheel',verbose_name='主页背景图★')
+    #将上传的图片定为'static/media/upload/wheel'下
+    img=models.ImageField(upload_to='upload/wheel',verbose_name='主页背景图★')
     isDelete=models.BooleanField(default=False,verbose_name='是否逻辑删除')
     class Meta:
         verbose_name='主页滚动图'

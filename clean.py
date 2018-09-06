@@ -1,7 +1,7 @@
 import pymysql
 import re
 import os
-base_path = '/home/siyang/site/myblog/myblog/static/media/images'
+base_path = '/home/siyang/site/myblog/myblog/static/media/upload'
 def findAndDel(list1,path):
     now1=os.listdir(base_path+path)
     for p in list1:
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     for i in range(len(a)):
         if not a[i][0].split('/')[-1] in Bposter:
             Bposter.append(a[i][0].split('/')[-1])
-        b = re.findall(r'<img src="../../../../../static/media/images/blog/conImg/(.+?)"(?:.+?)/>', a[i][1])
+        b = re.findall(r'<img src="../../../../../static/media/upload/blog/context/(.+?)"(?:.+?)/>', a[i][1])
         for one in b:
             if not one in BconImg:
                 BconImg.append(one)
@@ -37,6 +37,6 @@ if __name__ == '__main__':
             Pfile.append(a[i][1].split('/')[-1])
 
     findAndDel(Bposter,'/blog/poster')
-    findAndDel(BconImg,'/blog/conImg')
+    findAndDel(BconImg,'/blog/context')
     findAndDel(Pposter,'/portfolio/poster')
     findAndDel(Pfile,'/portfolio/file')

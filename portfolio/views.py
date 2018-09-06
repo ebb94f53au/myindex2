@@ -13,7 +13,7 @@ class PortfolioView(ListView):
         return Portfolio.objects.filter(isDelete=False)
     def get_context_data(self, **kwargs):
         context=super(PortfolioView,self).get_context_data(**kwargs)
-        context['title']='司杨的个人作品'
+        context['title']='司杨的个人作品/资源'
 
         return context
 

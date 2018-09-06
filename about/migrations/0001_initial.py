@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='aboutInfo',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('img', models.ImageField(upload_to='images/about', verbose_name='图片')),
+                ('img', models.ImageField(upload_to='upload/about', verbose_name='图片')),
                 ('text', models.TextField(verbose_name='关于详细')),
                 ('isDelete', models.BooleanField(default=False, verbose_name='是否逻辑删除')),
             ],

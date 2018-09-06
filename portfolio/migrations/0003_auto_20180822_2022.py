@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='portfolio',
             name='project',
-            field=models.FileField(default='images/portfolio/file/null', upload_to='images/portfolio/file', verbose_name='项目*'),
+            field=models.FileField(default='upload/portfolio/file/null', upload_to='upload/portfolio/file', verbose_name='项目*'),
         ),
     ]

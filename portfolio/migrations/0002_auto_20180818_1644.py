@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='portfolio',
             name='project',
-            field=models.FileField(default='images/portfolio/file/null', upload_to='images/portfolio/file', verbose_name='项目'),
+            field=models.FileField(default='upload/portfolio/file/null', upload_to='upload/portfolio/file', verbose_name='项目'),
         ),
         migrations.AlterField(
             model_name='portfolio',
             name='img',
-            field=models.ImageField(default='images/portfolio/poster/img-1.jpg', upload_to='images/portfolio/poster', verbose_name='封面海报'),
+            field=models.ImageField(default='upload/portfolio/poster/img-1.jpg', upload_to='upload/portfolio/poster', verbose_name='封面海报'),
         ),
     ]

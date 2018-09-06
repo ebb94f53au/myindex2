@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='wheel',
             name='img',
-            field=models.ImageField(upload_to='images/wheel', verbose_name='主页背景图★'),
+            field=models.ImageField(upload_to='upload/wheel', verbose_name='主页背景图★'),
         ),
         migrations.AlterField(
             model_name='wheel',
