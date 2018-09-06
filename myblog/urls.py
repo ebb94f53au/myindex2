@@ -28,5 +28,6 @@ urlpatterns = [
     path('',include('contact.urls')),
     path('',include('portfolio.urls')),
     path('ueditor/',include('DjangoUeditor.urls' )),
+    path('captcha/', include('captcha.urls')),
 
 ]

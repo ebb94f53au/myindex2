@@ -1009,6 +1009,28 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   -ms-border-radius: 7px;
   border-radius: 7px;
 }
+
+.form-captcha {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  background: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  height: 44px;
+  width:108px;
+  font-size: 18px;
+  font-weight: 300;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  border-radius: 7px;
+}
+.form-captcha:active, .form-captcha:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #228896;
+}
 .form-control:active, .form-control:focus {
   outline: none;
   box-shadow: none;

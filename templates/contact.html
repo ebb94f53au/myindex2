@@ -63,9 +63,12 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
+
 										<textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="留言" ></textarea>
 									</div>
 									<div class="form-group">
+										{{ register_from.captcha }}
+
 										<input type="submit" class="btn btn-primary btn-md" onclick="Submit('/contact/','#mesForm')" value="发送留言">
 									</div>
 								</div>

@@ -9,7 +9,9 @@ $.post(path,$(form).serialize(),function(data){
         location.reload()
                     }
     else{
-        alert("提交失败,请检查邮箱格式等");
+
+        alert("提交失败,请检查邮箱格式、验证码等");
+
         location.reload()
     }
 })
@@ -28,3 +30,12 @@ alert("请输入正确的页数")
 }
 
 }
+//刷新图片功能
+$(".captcha").click(function(){
+        var tmp = Math.random().toString();
+		$.get("?newsn=1&tmp="+tmp, function(result){
+            $('.captcha').attr("src", result);
+            $('#id_captcha_0').attr("value", result.split('/')[3]);
+						        });
+						    return false;
+						});

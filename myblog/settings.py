@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     #富文本
     'DjangoUeditor',
+    #验证码
+    'captcha',
 ]
 
 MIDDLEWARE = [
