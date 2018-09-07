@@ -43,9 +43,10 @@
                     <input name="name" type="text" placeholder="名字" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input name="email" type="text" placeholder="邮箱" class="form-control">
+                    <input name="email" type="text" placeholder="邮箱" class="form-control" id="email">
                 </div>
                 <div class="form-group">
+                    {{form.captcha}}
                     <input type="submit" value="发送评论" class="btn btn-primary btn-md" onclick="Submit('/blog/comment/','#comForm')">
                 </div>
             </div>

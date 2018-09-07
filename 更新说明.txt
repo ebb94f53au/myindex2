@@ -1,11 +1,13 @@
 ##############
 时间：2018.9.6
 作者：司杨
-使用外部源码包：xadmin 、djangoueditor(修改bug版本)、django-simple-captcha
+使用外部源码包：xadmin 、djangoueditor(修改bug版本)、django-simple-captcha、email功能
 更新内容：
         删除前富文本tinymce，取消原后台admin
         后台xadmin，ueditor富文本=》blog，about
         media/images文件夹 更改名字为 media/upload
         media/images/blog/conImg 文件夹更改名字为 media/upload/blog/context
         django-simple-captcha验证码 以及刷新图片功能
+        email:正确的留言信息自动发送 提醒邮件 到个人邮箱
+
 #####################

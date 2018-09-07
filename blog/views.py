@@ -3,7 +3,7 @@ from django.http import JsonResponse,HttpResponse
 from django.views.generic import ListView,DetailView
 from django.views.generic import View
 from .models import *
-
+from .commentForm.Form import commentForm
 # Create your views here.
 
 class BlogPageView(ListView):
@@ -22,15 +22,26 @@ class BlogPageView(ListView):
 
         return context
 from django.core.paginator import Paginator
+from captcha.views import CaptchaStore,captcha_image_url
 class BlogDetailView(DetailView):
     #博客博文详细
     template_name = 'detail.html'
     model = Post
     def get(self, request, *args, **kwargs):
-        #每看一次阅读数数量加一
-        response=super(BlogDetailView,self).get(request, *args, **kwargs)
+        #验证码
+        if request.GET.get('newsn') == '1':
+            # 生成的数字
+            csn = CaptchaStore.generate_key()
+            #生成的图片路径
+            cimageurl = captcha_image_url(csn)
 
+            return HttpResponse(cimageurl)
+
+
+        response=super(BlogDetailView,self).get(request, *args, **kwargs)
+        # 每看一次阅读数数量加一
         self.object.increase_views()
+
         return response
     def get_object(self, queryset=None):
         #自动找到哪篇博客根据urls ：pk
@@ -45,7 +56,9 @@ class BlogDetailView(DetailView):
         #分页评论数据
         context=super(BlogDetailView,self).get_context_data(**kwargs)
         page_by = 10
+
         paginator = Paginator(self.object.comment_set.all(), page_by)
+
         pageNum=self.request.GET.get('page') if  self.request.GET.get('page') else 1
         #当pagenum不存在时为1
         pageNum=pageNum if int(pageNum) <= paginator.num_pages else 1
@@ -56,12 +69,13 @@ class BlogDetailView(DetailView):
         context['paginator'] = paginator
         context['is_paginated'] = True
         context['title'] = self.object.title
-
+        form = commentForm()
+        context['form']=form
         if paginator.num_pages==0 or paginator.num_pages==1:
             context['is_paginated'] = False
         return context
 
-from .commentForm.Form import commentForm
+
 class CommentPost(View):
     #评论提交
     def post(self,request):

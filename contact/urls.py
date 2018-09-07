@@ -7,5 +7,6 @@ app_name='contact'
 urlpatterns = [
 
     path('contact/',ContactPageView.as_view(),name='contact_get'),
+    path('contact/send_email/',send_email,name='send_email'),
 
 ]

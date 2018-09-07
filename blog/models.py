@@ -92,6 +92,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,verbose_name='博客★')
     isDelete = models.BooleanField(default=False, verbose_name='是否逻辑删除')
     class Meta:
+        ordering = ['-created_time']
         verbose_name = '博客评论'
         verbose_name_plural = '博客评论'
     def __str__(self):

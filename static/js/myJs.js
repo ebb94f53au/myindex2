@@ -3,18 +3,32 @@ function Submit(path,form) {
 
 //评论提交留言按钮
 $.post(path,$(form).serialize(),function(data){
+
     if (data.status == 'success') {
         alert("提交成功");
 //        window.location.href="/contact/"
-        location.reload()
-                    }
-    else{
 
+          if (typeof(data.email_info)!="undefined"){
+            $.post('/contact/send_email/',{'email_info':data.email_info})
+
+                                        }
+        location.reload();
+
+
+
+                                 }
+    else{
         alert("提交失败,请检查邮箱格式、验证码等");
 
-        location.reload()
+        $(".captcha").click();
+        $('#id_captcha_1').val('');
+        $('#email').val('');
+
+
     }
 })
+
+
         }
 
 function TurnPage(turnPath){

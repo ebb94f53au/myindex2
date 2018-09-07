@@ -55,7 +55,7 @@
 										<input type="text" class="form-control" placeholder="姓名" name="name">
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control" placeholder="邮箱"name="email">
+										<input type="text" class="form-control" placeholder="邮箱"name="email" id="email">
 									</div>
 									<div class="form-group">
 										<input type="text" class="form-control" placeholder="联系方式"name="phone">
@@ -67,7 +67,7 @@
 										<textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="留言" ></textarea>
 									</div>
 									<div class="form-group">
-										{{ register_from.captcha }}
+										{{ form.captcha }}
 
 										<input type="submit" class="btn btn-primary btn-md" onclick="Submit('/contact/','#mesForm')" value="发送留言">
 									</div>
