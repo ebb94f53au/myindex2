@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import JsonResponse,HttpResponse
 from django.views.generic import ListView,DetailView
 from django.views.generic import View
@@ -21,6 +21,26 @@ class BlogPageView(ListView):
         context['title']='司杨的博客'
 
         return context
+
+class BlogPageViewByCategory(BlogPageView):
+    # 继承BlogPageView视图类，专为category分类
+    def get_queryset(self):
+        return Post.objects.filter(isDelete=False,category=self.kwargs.get('pk'))
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(BlogPageViewByCategory, self).get_context_data(**kwargs)
+        category = get_object_or_404(Category, pk=self.kwargs.get('pk'), isDelete=False)
+        context['tip']='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在查看相关分类: '+category.name
+        return context
+class BlogPageViewByTag(BlogPageView):
+    # 继承BlogPageView视图类，专为tag分类
+    def get_queryset(self):
+        return Post.objects.filter(isDelete=False,tags=self.kwargs.get('pk'))
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(BlogPageViewByTag, self).get_context_data(**kwargs)
+        tag=get_object_or_404(Tag, pk=self.kwargs.get('pk'),isDelete=False)
+        context['tip']='<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在查看相关标签: '+tag.name
+        return context
+
 from django.core.paginator import Paginator
 from captcha.views import CaptchaStore,captcha_image_url
 class BlogDetailView(DetailView):
@@ -43,15 +63,7 @@ class BlogDetailView(DetailView):
         self.object.increase_views()
 
         return response
-    def get_object(self, queryset=None):
-        #自动找到哪篇博客根据urls ：pk
-        post=super(BlogDetailView,self).get_object()
-        post.body=markdown.markdown(post.body,extensions=[
-                                      'markdown.extensions.extra',
-                                      'markdown.extensions.codehilite',
-                                      'markdown.extensions.toc',
-                                  ])
-        return post
+
     def get_context_data(self, **kwargs):
         #分页评论数据
         context=super(BlogDetailView,self).get_context_data(**kwargs)

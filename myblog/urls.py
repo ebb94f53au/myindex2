@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 import xadmin
-
 xadmin.autodiscover()
+from  django.conf.urls import handler404,handler500
+from .views import to_404page,to_500page
+
+handler404 = to_404page
+handler500 = to_500page
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
@@ -29,5 +33,8 @@ urlpatterns = [
     path('',include('portfolio.urls')),
     path('ueditor/',include('DjangoUeditor.urls' )),
     path('captcha/', include('captcha.urls')),
+
+
+
 
 ]

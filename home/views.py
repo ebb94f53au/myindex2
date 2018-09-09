@@ -36,7 +36,7 @@ class HomePageView(TemplateView):
         try:
             context['viewsNums']=ViewsNum.objects.get(date=today,isDelete=False)
         except:
-            pass
+            context['viewsNums']=None
         # context['viewsNums']=get_object_or_404(ViewsNum,date=today,isDelete=False)
 
         return context

@@ -114,8 +114,12 @@
 					<!--</div>-->
 				<!--</div>-->
 			<!--</div>-->
+			{%if viewsNums%}
 			今日浏览量:{{viewsNums.todayNum}}&nbsp;
-		总浏览量:{{viewsNums.sumNum}}
+			总浏览量:{{viewsNums.sumNum}}
+			{%else%}
+			浏览量统计模块出现错误。
+			{%endif%}
 		</div>
 
 {%endblock main%}

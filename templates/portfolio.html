@@ -7,14 +7,16 @@
 				<div class="row row-bottom-padded-md">
 					{%for portfolio in portfolio_list%}
 					<div class="col-md-3 col-sm-6 col-padding text-center animate-box">
-						<a href="https://{{portfolio.url}}" class="work image-popup" style="background-image: url({%static 'media/'%}{{portfolio.img}});">
+						<a href="{{portfolio.url}}" class="work image-popup" style="background-image: url({%static 'media/'%}{{portfolio.img}});">
 							<div class="desc">
 								<h3>{{portfolio.name}}</h3>
 								<!--<span>IllustrationIllustrationIllustrationIllusion</span>-->
 								<p>{{portfolio.info}}</p>
 							</div>
 						</a>
-						<a href="{%url 'portfolio:download' portfolio.pk%}">下载源代码</a>
+						<a href="{%url 'portfolio:download' type=0 pk=portfolio.pk%}">下载源代码</a>
+						<!--<a href="{%static 'media/'%}{{portfolio.project.name}}">下载源代码</a>-->
+						(下载数:{{portfolio.downloadNum}})
 					</div>
 					{%empty%}
 					<a style="margin-left:100px;">暂无项目</a>
@@ -44,12 +46,30 @@
 				</div>
 				{%endif%}
 			</div>
+			<div class="fh5co-narrow-content">
+				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">资源分享(寻找资源可用ctrl+F寻找关键字)</h2>
+				<ul>
+				{%for res in resources%}
+					<li>
+
+					<img style="vertical-align: middle; margin-right: 2px;" src="/static/ueditor/dialogs/attachment/fileTypeImages/icon_rar.gif">
+				<a style="font-size:18px; color:#0066cc;" href="{%url 'portfolio:download' type=1 pk=res.pk%}" title="{{res.name}}">{{res.name}}</a>
+				(下载数:{{res.downloadNum}})
+
+					</li>
+					{%empty%}
+					暂无分享资源
+				{%endfor %}
+				</ul>
+			</div>
+
 		
 			<div id="get-in-touch">
 				<div class="fh5co-narrow-content">
 					<div class="row">
 						<div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
-							<h1 class="fh5co-heading-colored">联系</h1>
+
+							<h1 class="fh5co-heading-colored" >联系</h1>
 						</div>
 					</div>
 					<div class="row">

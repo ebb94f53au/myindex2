@@ -10,3 +10,16 @@ class aboutInfo(models.Model):
     class Meta:
         verbose_name='关于页详细'
         verbose_name_plural='关于页详细'
+from django.dispatch import receiver
+from django.db.models.signals import post_delete
+from django.conf import settings
+import os
+@receiver(post_delete, sender=aboutInfo)
+def delete_upload_files(sender, instance, **kwargs):
+    # xadmin 删除自动删除本地文件
+    files = getattr(instance, 'img', '')
+    if not files :
+        return
+    fname = os.path.join(settings.MEDIA_ROOT, str(files))
+    if os.path.isfile(fname):
+        os.remove(fname)

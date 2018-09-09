@@ -19,10 +19,9 @@ class ContactPageView(View):
             return HttpResponse(cimageurl)
 
         # get时展示联系方式
-        try:
-            info=Info.objects.get(isDelete=False)
-        except:
-            pass
+
+        info=get_object_or_404(Info,isDelete=False)
+
         form= messageForm()
         return render(request,'contact.html',{'info':info,
                                               'title':'★联系页面',
@@ -44,18 +43,7 @@ class ContactPageView(View):
             return JsonResponse({'status': 'error',
                                  'message':message})
 
-# def create_message(request):
-#     if request.method=='POST':
-#         form=messageForm(request.POST)
-#
-#         if form.is_valid():
-#             message=form.save()
-#             message.save()
-#             return JsonResponse({'status':111})
-#         else:
-#             return redirect('/contact/')
-#     else:
-#         return redirect('/contact/')
+
 from django.conf import  settings
 def send_email(request):
     if request.method=='POST':
@@ -65,6 +53,7 @@ def send_email(request):
         # 收件箱列表(可以发送给多个人),失败静默(若发送失败，报错提示我们)
 
         if email_info:
+            #settings.EMAIL_HOST_USER,settings.EMAIL_INTO_LIST 在setting 中定义
             send_mail('您收到一封来自www.siyang.site的留言', email_info, settings.EMAIL_HOST_USER,settings.EMAIL_INTO_LIST ,
                       fail_silently=False)
         else:

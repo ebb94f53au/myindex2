@@ -7,7 +7,7 @@ app_name='portfolio'
 urlpatterns = [
 
     path('portfolio/',PortfolioView.as_view(),name='portfolio_get'),
-    path('download/<int:pk>/',Download,name='download')
+    path('download/<int:type>/<int:pk>/',Download,name='download')
 
 
 ]

@@ -42,7 +42,7 @@ class Post(models.Model):
     views = models.PositiveIntegerField(default=0,verbose_name='阅读量')
     category = models.ForeignKey(Category,on_delete=models.CASCADE,verbose_name='分类★')
     tags = models.ManyToManyField(Tag, blank=True,verbose_name='标签★')
-    img = models.ImageField(default='upload/blog/img-4.jpg',upload_to='upload/blog/poster',verbose_name='图片')#MEDIA
+    img = models.ImageField(default='upload/blog/poster/img-4.jpg',upload_to='upload/blog/poster',verbose_name='图片')#MEDIA
     # 文章作者，这里 User 是从 django.contrib.auth.models 导入的。
     # django.contrib.auth 是 Django 内置的应用，专门用于处理网站用户的注册、登录等流程，
     # User 是 Django 为我们已经写好的用户模型。
@@ -54,8 +54,8 @@ class Post(models.Model):
     # 自定义 get_absolute_url 方法
     # 记得从 django.urls 中导入 reverse 函数
 
-    # def get_absolute_url(self):
-    #     return reverse('blog:detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('blog:blogDetail_get', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['-created_time']
@@ -97,3 +97,26 @@ class Comment(models.Model):
         verbose_name_plural = '博客评论'
     def __str__(self):
         return self.text[:20]
+
+
+from django.dispatch import receiver
+from django.db.models.signals import post_delete
+from django.conf import settings
+import os
+import re
+@receiver(post_delete, sender=Post)
+def delete_upload_files(sender, instance, **kwargs):
+    # xadmin 删除自动删除本地文件
+    files = getattr(instance, 'img', '')
+    if not files or files.name=='upload/blog/poster/img-4.jpg':
+        return
+    fname = os.path.join(settings.MEDIA_ROOT, str(files))
+    if os.path.isfile(fname):
+        os.remove(fname)
+    body =getattr(instance, 'body', '')
+    # b = re.findall(r'<img src="/static/media/(.+?)"(?:.+?)/>',str(body))
+    b = re.findall(r'"/static/media/(.+?)"',str(body))
+    for i in b:
+        fname = os.path.join(settings.MEDIA_ROOT, str(i))
+        if os.path.isfile(fname):
+            os.remove(fname)

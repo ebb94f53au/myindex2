@@ -12,7 +12,7 @@
 									<i class="icon-globe"></i>
 								</div>
 								<div class="fh5co-text">
-									<p><a href="#">{{info.email}}</a></p>
+									<p><a href="#">{{info.email|default:"暂无"}}</a></p>
 								</div>
 							</div>
 						</div>
@@ -22,7 +22,7 @@
 									<i class="icon-map"></i>
 								</div>
 								<div class="fh5co-text">
-									<p>{{info.wechat}}</p>
+									<p>{{info.wechat|default:"暂无"}}</p>
 								</div>
 							</div>
 						</div>
@@ -32,7 +32,7 @@
 									<i class="icon-phone"></i>
 								</div>
 								<div class="fh5co-text">
-									<p><a href="tel://">{{info.phone}}</a></p>
+									<p><a href="tel://">{{info.phone|default:"暂无"}}</a></p>
 								</div>
 							</div>
 						</div>
