@@ -28,8 +28,14 @@ class CommentAdmin(object):
     search_fields = ['name','isDelete']
     list_filter = ['name','email','text','created_time','post','isDelete']
 
+class CommentBackAdmin(object):
+    list_display = ['comment','text','created_time','isDelete']
+    search_fields = ['name','isDelete']
+    list_filter = ['comment','text','created_time','isDelete']
+
 
 xadmin.site.register(Post, PostAdmin)
 xadmin.site.register(Category,CategoryAdmin)
 xadmin.site.register(Tag,TagAdmin)
 xadmin.site.register(Comment,CommentAdmin)
+xadmin.site.register(CommentBack,CommentBackAdmin)

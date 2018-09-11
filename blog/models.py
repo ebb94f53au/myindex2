@@ -98,9 +98,22 @@ class Comment(models.Model):
     def __str__(self):
         return self.text[:20]
 
+class CommentBack(models.Model):
+    #评论的回复，暂时只能博主回复
+    comment=models.ForeignKey(Comment,on_delete=models.CASCADE,verbose_name='评论★')
+    text = models.TextField(verbose_name='评论回复正文★')
+    created_time = models.DateTimeField(default=timezone.now,verbose_name='创建时间')
+    isDelete = models.BooleanField(default=False, verbose_name='是否逻辑删除')
+
+    class Meta:
+        ordering = ['created_time']
+        verbose_name = '博客评论回复'
+        verbose_name_plural = '博客评论回复'
+    def __str__(self):
+        return self.text[:20]
 
 from django.dispatch import receiver
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_delete,post_save
 from django.conf import settings
 import os
 import re
@@ -120,3 +133,19 @@ def delete_upload_files(sender, instance, **kwargs):
         fname = os.path.join(settings.MEDIA_ROOT, str(i))
         if os.path.isfile(fname):
             os.remove(fname)
+
+
+from django.core.mail import send_mail
+@receiver(post_save, sender=CommentBack)
+def save_commentBack(sender, instance, **kwargs):
+    #留言回复，邮件提醒
+    text=getattr(instance,'text','')
+    email=[instance.comment.email]
+    postname=instance.comment.post.title
+    comment_text=instance.comment.text
+    pk=instance.comment.post.pk
+    email_info='您好，我是司杨个人网站(www.siyang.site)的管理员' \
+               '，首先感谢您在博客【'+postname+'】(www.siyang.site/blog/'+str(pk)+'/)的留言，' \
+                 '根据此留言:\n【'+comment_text+'】\n在此做出回复:\n【'+text+'】\n最后感谢您的支持,祝您生活愉快。'
+    send_mail('您收到一封来自www.siyang.site的留言回复', email_info, settings.EMAIL_HOST_USER, [instance.comment.email],
+              fail_silently=False)

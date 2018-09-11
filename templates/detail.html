@@ -60,12 +60,33 @@
                         <span class="nickname">{{ comment.name }}</span>
                         <time class="submit-date"
                               datetime="{{ comment.created_time }}">{{ comment.created_time }}</time>
-                        <div class="text">
+                        <div class="text" style="color:black;" >
                             {{ comment.text|safe }}
                         </div>
-                        <div align="center">
-                            回复
+
+                        <!--评论的回复-->
+                        {%if comment.commentback_set.count != 0 %}
+                        <div style="border:1.5px solid #b3b3b3;margin-left:2.5em;margin-right:10em;">
+                            <p style="font-size:18px;margin-bottom: 0em;margin-left:0.5em;">回复:</p>
+                            <div style="margin-left: 2.5em;">
+                            <ul class="list-unstyled">
+                                {{comment.commentBack_set.count}}
+                                {%for comback in comment.commentback_set.all%}
+                                <li class="comment-item">
+                                <span class="nickname">{{ post.author }}</span>
+                                <time class="submit-date"
+                                      datetime="{{ comment.created_time }}">{{ comback.created_time }}</time>
+                                <div class="text" style="color:black;">
+                                    {{ comback.text|safe }}
+
+                                </div>
+                                </li>
+
+                                {%endfor%}
+                            </ul>
+                            </div>
                         </div>
+                        {%endif%}
                     </li>
                 {% empty %}
                     暂无评论
