@@ -4,7 +4,7 @@
 {%load cache%}
 <div id="fh5co-main">
     <div class="fh5co-narrow-content">
-        {%cache 3600 'post'%}
+        {%cache 3600 post post.pk %}
         <header class="entry-header">
             <h1 class="entry-title">{{ post.title }}</h1>
             <div class="entry-meta">
