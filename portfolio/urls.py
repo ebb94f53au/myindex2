@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path,include
 from .views import *
-
+from django.views.decorators.cache import cache_page
 
 app_name='portfolio'
 urlpatterns = [

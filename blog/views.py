@@ -43,6 +43,7 @@ class BlogPageViewByTag(BlogPageView):
 
 from django.core.paginator import Paginator
 from captcha.views import CaptchaStore,captcha_image_url
+
 class BlogDetailView(DetailView):
     #博客博文详细
     template_name = 'detail.html'
@@ -77,9 +78,11 @@ class BlogDetailView(DetailView):
         # 当pagenum大于总数是为1
 
         comments = paginator.page(pageNum)
+
         context['comments'] = comments
         context['paginator'] = paginator
         context['is_paginated'] = True
+
         context['title'] = self.object.title
         form = commentForm()
         context['form']=form

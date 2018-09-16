@@ -7,7 +7,7 @@
 				<div class="row row-bottom-padded-md">
 					{%for portfolio in portfolio_list%}
 					<div class="col-md-3 col-sm-6 col-padding text-center animate-box">
-						<a href="{{portfolio.url}}" class="work image-popup" style="background-image: url({%static 'media/'%}{{portfolio.img}});">
+						<a href="{{portfolio.url}}" target="_blank" class="work image-popup" style="background-image: url({%static 'media/'%}{{portfolio.img}});">
 							<div class="desc">
 								<h3>{{portfolio.name}}</h3>
 								<!--<span>IllustrationIllustrationIllustrationIllusion</span>-->

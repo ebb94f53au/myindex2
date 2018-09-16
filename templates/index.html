@@ -1,9 +1,10 @@
 {%extends 'base.html'%}
 {%load staticfiles%}
-
+{%load cache%}
 {%block main%}
 
 		<div id="fh5co-main">
+			{%cache 3600 'wheels'%}
 			<aside id="fh5co-hero" class="js-fullheight">
 				<div class="flexslider js-fullheight">
 					<ul class="slides">
@@ -24,7 +25,10 @@
 				   	{%endfor%}
 				  	</ul>
 			  	</div>
+
 			</aside>
+
+
 
 			<!--<div class="fh5co-narrow-content">-->
 				<!--<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">服务</h2>-->
@@ -76,6 +80,7 @@
 					<!--</div>-->
 				<!--</div>-->
 			<!--</div>-->
+
 			<div class="fh5co-narrow-content">
 				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">最近的博客</h2>
 				<div class="row row-bottom-padded-md">
@@ -97,7 +102,7 @@
 					{%endfor%}
 				</div>
 			</div>
-
+		{%endcache%}
 			<!--<div id="get-in-touch">-->
 				<!--<div class="fh5co-narrow-content">-->
 					<!--<div class="row">-->
