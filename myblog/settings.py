@@ -107,7 +107,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'myblog',
         'USER':'root',
-        'PASSWORD':'ebb94f53au',
+        'PASSWORD':'你的密码',
         'HOST':'localhost',
         'PORT':'3306',
     }
@@ -166,7 +166,7 @@ EMAIL_USE_SSL = True    #是否使用SSL加密，qq企业邮箱要求使用
 EMAIL_HOST = 'smtp.exmail.qq.com'   #发送邮件的邮箱 的 SMTP服务器，这里用了qq企业邮箱
 EMAIL_PORT = 465     #发件箱的SMTP服务器端口
 EMAIL_HOST_USER = 'contact@siyang.site'    #发送邮件的邮箱地址
-EMAIL_HOST_PASSWORD = 'Ebb94f53au'         #发送邮件的邮箱密码
+EMAIL_HOST_PASSWORD = '你的企业邮箱密码'         #发送邮件的邮箱密码
 
 #发送到哪个邮箱后面通过setting调用这个，自定义
 EMAIL_INTO_LIST=['1377706770@qq.com']
